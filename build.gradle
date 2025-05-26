@@ -60,7 +60,7 @@ dependencies {
 
 // Maven Publishing
 ext {
-    PUBLISH_GROUP_ID = 'com.github.oothp'
+    PUBLISH_GROUP_ID = 'io.github.oothp'
     PUBLISH_VERSION = "1.9.4"
     PUBLISH_ARTIFACT_ID = 'pdfium-android'
 }
