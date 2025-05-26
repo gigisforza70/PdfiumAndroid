@@ -3,6 +3,43 @@
 # This scrip can be used to build PdfiumAndroid library and its dependent libraries(libpng and libfreetype2).
 
 
+check_required_tools() {
+    # Check for cmake
+    if ! command -v cmake &> /dev/null; then
+        echo "Error: cmake is not installed or not in PATH"
+        echo "Please install cmake using one of the following methods:"
+        echo "  - macOS: brew install cmake"
+        echo "  - Ubuntu/Debian: sudo apt-get install cmake"
+        echo "  - Or download from https://cmake.org/download/"
+        exit 1
+    fi
+
+    # Check for git
+    if ! command -v git &> /dev/null; then
+        echo "Error: git is not installed or not in PATH"
+        echo "Please install git to continue"
+        exit 1
+    fi
+
+    # Check for wget
+    if ! command -v wget &> /dev/null; then
+        echo "Error: wget is not installed or not in PATH"
+        echo "Please install wget to continue"
+        exit 1
+    fi
+}
+
+# Set NDK_ROOT if not already set
+if [ -z "${NDK_ROOT}" ]; then
+    echo "Error: NDK_ROOT environment variable is not set."
+    echo "Please set NDK_ROOT to point to your Android NDK installation."
+    echo "Example: export NDK_ROOT=/path/to/android-ndk"
+    exit 1
+fi
+
+# Check for required tools before proceeding
+check_required_tools
+
 export BUILD_ROOT="builddir"
 rm -fr ${BUILD_ROOT}
 

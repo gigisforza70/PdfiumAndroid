@@ -1,3 +1,6 @@
+## 1.9.4 (2025-05-26)
+* include prebuilt libs
+
 ## 1.9.2 (2025-03-15)
 * Upgrade libfreetype to 2.13.3
   * It is a security update, see [here](https://nvd.nist.gov/vuln/detail/CVE-2025-27363) for more details.
