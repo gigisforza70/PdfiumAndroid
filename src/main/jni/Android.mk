@@ -10,14 +10,6 @@ LOCAL_SRC_FILES := $(LOCAL_PATH)/lib/$(ARCH_PATH)/libmodpdfium.so
 
 include $(PREBUILT_SHARED_LIBRARY)
 
-#c++_shared
-include $(CLEAR_VARS)
-LOCAL_MODULE := libmodc++_shared
-
-LOCAL_SRC_FILES := $(LOCAL_PATH)/lib/$(ARCH_PATH)/libc++_shared.so
-
-include $(PREBUILT_SHARED_LIBRARY)
-
 #libmodft2
 include $(CLEAR_VARS)
 LOCAL_MODULE := libmodft2
@@ -37,12 +29,11 @@ include $(PREBUILT_SHARED_LIBRARY)
 #Main JNI library
 include $(CLEAR_VARS)
 LOCAL_MODULE := jniPdfium
-
 LOCAL_CFLAGS += -DHAVE_PTHREADS
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
-LOCAL_SHARED_LIBRARIES += aospPdfium
-LOCAL_LDLIBS += -llog -landroid -ljnigraphics
-
-LOCAL_SRC_FILES :=  $(LOCAL_PATH)/src/mainJNILib.cpp
-
+LOCAL_SHARED_LIBRARIES := aospPdfium libmodft2 libmodpng  # Removed libmodc++_shared
+LOCAL_LDLIBS += -llog -landroid -ljnigraphics -lc++  # Explicitly link libc++
+LOCAL_SRC_FILES := $(LOCAL_PATH)/src/mainJNILib.cpp
+LOCAL_CPPFLAGS += -stdlib=libc++
+LOCAL_CPP_FEATURES += rtti exceptions
 include $(BUILD_SHARED_LIBRARY)

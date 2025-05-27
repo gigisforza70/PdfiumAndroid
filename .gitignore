@@ -14,3 +14,4 @@ src/main/obj
 builddir/*
 freetype-*
 libpng
+publish-mavencentral.gradle
