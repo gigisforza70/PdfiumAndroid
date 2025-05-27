@@ -1,3 +1,6 @@
+## 1.9.5-beta01 (2025-05-27)
+* upgrade gradle wrapper to 8.11.1
+
 ## 1.9.4 (2025-05-26)
 * include prebuilt libs
 

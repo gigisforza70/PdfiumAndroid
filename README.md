@@ -7,4 +7,4 @@ On top of the original project, this fork adds the 16KB page size support for An
 - Update [libpng v1.6.44](https://github.com/pnggroup/libpng/releases/tag/v1.6.44) and [libfreetype2 v2.10.0](https://download.savannah.gnu.org/releases/freetype/) binaries for building PdfiumAndroid library. 
 
 
-- available at: implementation("io.github.oothp:pdfium-android:1.9.4")
+- available at: implementation("io.github.oothp:pdfium-android:1.9.5-beta01")
