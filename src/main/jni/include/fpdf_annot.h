@@ -1,4 +1,4 @@
-// Copyright 2017 The PDFium Authors
+// Copyright 2017 PDFium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -10,6 +10,8 @@
 // NOLINTNEXTLINE(build/include)
 #include "fpdfview.h"
 
+// NOLINTNEXTLINE(build/include)
+#include "fpdf_doc.h"
 // NOLINTNEXTLINE(build/include)
 #include "fpdf_formfill.h"
 
@@ -82,16 +84,6 @@ extern "C" {
 #define FPDF_FORMFLAG_CHOICE_EDIT (1 << 18)
 #define FPDF_FORMFLAG_CHOICE_MULTI_SELECT (1 << 21)
 
-// Additional actions type of form field:
-//   K, on key stroke, JavaScript action.
-//   F, on format, JavaScript action.
-//   V, on validate, JavaScript action.
-//   C, on calculate, JavaScript action.
-#define FPDF_ANNOT_AACTION_KEY_STROKE 12
-#define FPDF_ANNOT_AACTION_FORMAT 13
-#define FPDF_ANNOT_AACTION_VALIDATE 14
-#define FPDF_ANNOT_AACTION_CALCULATE 15
-
 typedef enum FPDFANNOT_COLORTYPE {
   FPDFANNOT_COLORTYPE_Color = 0,
   FPDFANNOT_COLORTYPE_InteriorColor
@@ -101,7 +93,6 @@ typedef enum FPDFANNOT_COLORTYPE {
 // Check if an annotation subtype is currently supported for creation.
 // Currently supported subtypes:
 //    - circle
-//    - fileattachment
 //    - freetext
 //    - highlight
 //    - ink
@@ -506,31 +497,6 @@ FPDFAnnot_GetBorder(FPDF_ANNOTATION annot,
                     float* border_width);
 
 // Experimental API.
-// Get the JavaScript of an event of the annotation's additional actions.
-// |buffer| is only modified if |buflen| is large enough to hold the whole
-// JavaScript string. If |buflen| is smaller, the total size of the JavaScript
-// is still returned, but nothing is copied.  If there is no JavaScript for
-// |event| in |annot|, an empty string is written to |buf| and 2 is returned,
-// denoting the size of the null terminator in the buffer.  On other errors,
-// nothing is written to |buffer| and 0 is returned.
-//
-//    hHandle     -   handle to the form fill module, returned by
-//                    FPDFDOC_InitFormFillEnvironment().
-//    annot       -   handle to an interactive form annotation.
-//    event       -   event type, one of the FPDF_ANNOT_AACTION_* values.
-//    buffer      -   buffer for holding the value string, encoded in UTF-16LE.
-//    buflen      -   length of the buffer in bytes.
-//
-// Returns the length of the string value in bytes, including the 2-byte
-// null terminator.
-FPDF_EXPORT unsigned long FPDF_CALLCONV
-FPDFAnnot_GetFormAdditionalActionJavaScript(FPDF_FORMHANDLE hHandle,
-                                            FPDF_ANNOTATION annot,
-                                            int event,
-                                            FPDF_WCHAR* buffer,
-                                            unsigned long buflen);
-
-// Experimental API.
 // Check if |annot|'s dictionary has |key| as a key.
 //
 //   annot  - handle to an annotation.
@@ -846,23 +812,6 @@ FPDFAnnot_GetFontSize(FPDF_FORMHANDLE hHandle,
                       float* value);
 
 // Experimental API.
-// Get the RGB value of the font color for an |annot| with variable text.
-//
-//   hHandle  - handle to the form fill module, returned by
-//              FPDFDOC_InitFormFillEnvironment.
-//   annot    - handle to an annotation.
-//   R, G, B  - buffer to hold the RGB value of the color. Ranges from 0 to 255.
-//
-// Returns true if the font color was set, false on error or if the font
-// color was not provided.
-FPDF_EXPORT FPDF_BOOL FPDF_CALLCONV
-FPDFAnnot_GetFontColor(FPDF_FORMHANDLE hHandle,
-                       FPDF_ANNOTATION annot,
-                       unsigned int* R,
-                       unsigned int* G,
-                       unsigned int* B);
-
-// Experimental API.
 // Determine if |annot| is a form widget that is checked. Intended for use with
 // checkbox and radio button widgets.
 //
@@ -985,25 +934,6 @@ FPDFAnnot_GetFormFieldExportValue(FPDF_FORMHANDLE hHandle,
 // Returns true if successful.
 FPDF_EXPORT FPDF_BOOL FPDF_CALLCONV FPDFAnnot_SetURI(FPDF_ANNOTATION annot,
                                                      const char* uri);
-
-// Experimental API.
-// Get the attachment from |annot|.
-//
-//   annot - handle to a file annotation.
-//
-// Returns the handle to the attachment object, or NULL on failure.
-FPDF_EXPORT FPDF_ATTACHMENT FPDF_CALLCONV
-FPDFAnnot_GetFileAttachment(FPDF_ANNOTATION annot);
-
-// Experimental API.
-// Add an embedded file with |name| to |annot|.
-//
-//   annot    - handle to a file annotation.
-//   name     - name of the new attachment.
-//
-// Returns a handle to the new attachment object, or NULL on failure.
-FPDF_EXPORT FPDF_ATTACHMENT FPDF_CALLCONV
-FPDFAnnot_AddFileAttachment(FPDF_ANNOTATION annot, FPDF_WIDESTRING name);
 
 #ifdef __cplusplus
 }  // extern "C"
