@@ -1,3 +1,7 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+
 buildscript {
     repositories {
         google()
@@ -9,8 +13,7 @@ buildscript {
     }
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
+
 
 android {
     namespace 'com.shockwave.pdfium'
@@ -49,6 +52,18 @@ android {
     }
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.gigisforza70'
+                artifactId = 'PdfiumAndroid' // Sostituisci con il nome esatto del tuo artifact
+                version = '4.0'
+            }
+        }
+    }
+}
 
 
 dependencies {
