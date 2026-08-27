@@ -40,8 +40,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 35
-        versionCode 6
-        versionName "6.0"
+        versionCode 7
+        versionName "7.0"
     }
 
     buildTypes {
@@ -55,13 +55,14 @@ android {
 afterEvaluate {
     publishing {
         publications {
-            release(MavenPublication) {
+            // Change 'release' to match your actual publication name if needed
+            maven(MavenPublication) {
                 from components.release
                 
-                // Assicurati di specificare groupId, artifactId e version se non già fatto
+                // Make sure to define group, artifactId, and version if not already done
                 groupId = 'com.github.gigisforza70'
                 artifactId = 'PdfiumAndroid'
-                version = '6.0'
+                version = '7.0'
             }
         }
     }
