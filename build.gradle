@@ -1,5 +1,7 @@
-apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
 
 
 buildscript {
@@ -52,6 +54,19 @@ android {
     }
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                
+                groupId = 'com.github.gigisforza70'
+                artifactId = 'PdfiumAndroid'
+                version = '1.0.0'
+            }
+        }
+    }
+}
 
 
 
