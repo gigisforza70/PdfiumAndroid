@@ -57,8 +57,10 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
+                
+                // Assicurati di specificare groupId, artifactId e version se non già fatto
                 groupId = 'com.github.gigisforza70'
-                artifactId = 'PdfiumAndroid' // Sostituisci con il nome esatto del tuo artifact
+                artifactId = 'PdfiumAndroid'
                 version = '5.0'
             }
         }
