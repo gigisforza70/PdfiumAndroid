@@ -40,8 +40,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 35
-        versionCode 2
-        versionName "2.0"
+        versionCode 8
+        versionName "8.0"
     }
 
     buildTypes {
@@ -60,7 +60,7 @@ afterEvaluate {
                 
                 groupId = 'com.github.gigisforza70'
                 artifactId = 'PdfiumAndroid'
-                version = '2.0.0'
+                version = '8.0'
             }
         }
     }
