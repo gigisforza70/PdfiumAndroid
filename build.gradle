@@ -41,8 +41,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 35
-        versionCode 8
-        versionName "8.0"
+        versionCode 8.1
+        versionName "8.1"
     }
 
     buildTypes {
@@ -61,7 +61,7 @@ afterEvaluate {
                 
                 groupId = 'com.github.gigisforza70'
                 artifactId = 'PdfiumAndroid'
-                version = '8.0'
+                version = '8.1'
             }
         }
     }
