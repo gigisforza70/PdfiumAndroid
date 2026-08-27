@@ -15,6 +15,13 @@ plugins {
     id 'maven-publish'
 }
 
+// FORZA JAVA 17 A LIVELLO DI PROGETTO PER EVITARE CHE JITPACK USI JAVA 8
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 
 android {
     namespace 'com.shockwave.pdfium'
@@ -51,6 +58,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
 }
 
 afterEvaluate {
